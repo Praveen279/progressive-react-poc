@@ -1,0 +1,34 @@
+body {
+  background: #CCC;
+}
+
+.channels-wrapper {
+  display: 'inline';
+  margin: 20px;
+}
+
+.c-item-container {
+  background: #FFF;
+  width: 120px;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.c-item-container-selected {
+  background: #00BD73;
+}
+
+.c-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  padding-bottom: 5px;
+}
+
+.c-content {
+  font-size: 10px;
+  word-wrap: break-word;
+}
+

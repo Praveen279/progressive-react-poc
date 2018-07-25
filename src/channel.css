@@ -1,0 +1,16 @@
+.channel-container {
+    background: #FFF;
+}
+
+.channel-selected {
+    background: #00BD73;
+}
+
+.channel-label {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.channel-content {
+    font-size: 10px;
+}
