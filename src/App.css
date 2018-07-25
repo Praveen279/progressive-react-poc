@@ -3,7 +3,12 @@ body {
 }
 
 .channels-wrapper {
-  display: 'inline';
+  margin: 20px;
+}
+
+.accordian-child-class {
+  border-left: 1px solid #FFF;
+  min-height: 100px;
   margin: 20px;
 }
 
@@ -32,3 +37,7 @@ body {
   word-wrap: break-word;
 }
 
+.channels-accordian {
+  margin: 20px 30px;
+  min-height: 180px;
+}

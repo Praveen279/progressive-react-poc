@@ -1,0 +1,31 @@
+.tacc-title {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tacc-title-container {
+    display: flex;
+}
+
+.tacc-desc {
+    font-size: 8px;
+}
+
+.tacc-index {
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    margin: 0px 10px;
+    line-height: 24px;
+    color: #FFF;
+    font-size: 12px;
+}
+
+.tacc-common {
+    background: #028dc8;
+}
+
+.tacc-show {
+    background: #fdcc4d;
+}
