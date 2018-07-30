@@ -1,0 +1,12 @@
+.grid-col-container,
+.grid-row {
+    display: flex;
+}
+
+.grid-cell {
+    padding: 10px;
+}
+
+.grid-col-container div {
+    padding: 10px;
+}

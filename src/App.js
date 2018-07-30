@@ -1,110 +1,65 @@
-import React, { Component } from 'react';
-import Channel from './channel'
+import React, { Component } from 'react'
 import './App.css'
-import TreeAccordian from './TreeAccordian'
-
-const channels = [{
-  label: 'phone',
-  content: 'Out of the loop shotgun approach, Wheelhouse.'
-}, {
-  label: 'chat',
-  content: 'Out of the loop shotgun approach, Wheelhouse.'
-}, {
-  label: 'email',
-  content: 'Out of the loop shotgun approach, Wheelhouse.'
-}]
-
-const scheduleTypes = [{
-  label: 'holiday',
-  content: 'Out of the loop shotgun approach, Wheelhouse.'
-}, {
-  label: 'seasonal',
-  content: 'Out of the loop shotgun approach, Wheelhouse.'
-}, {
-  label: 'meeting',
-  content: 'Out of the loop shotgun approach, Wheelhouse.'
-}]
+import Grid from './grid'
 
 class App extends Component {
 
-  state = { channels, scheduleTypes }
+  columnsData = [{
+    name: 'Type',
+    field: 'type',
+    style: {
+      width: '150px'
+    }
+  }, {
+    name: 'Name',
+    field: 'name',
+    style: {
+      width: '150px'
+    }
+  }, {
+    name: 'Description',
+    field: 'description',
+    style: {
+      width: '300px'
+    }
+  }, {
+    name: 'Status',
+    field: 'status',
+    cellRenderer: value => <div>{value ? 'Yes' : 'No'}</div>,
+    style: {
+      width: '150px'
+    }
+  }]
 
-  handleChannelSelection = (cLabel, stateAttr, channels) => {
-    channels = channels.map(c => { c.selected = false; return c })
-    const i = channels.findIndex(c => c.label === cLabel)
-    channels[i].selected = true
-    this.setState({ [stateAttr]: channels })
-  }
+  rowData = [{
+    type: 'Base',
+    name: 'HOO1',
+    description: 'HOO Desc 1',
+    status: true
+  }, {
+    type: 'Meeting',
+    name: 'HOO2',
+    description: 'HOO Desc 2',
+    status: true
+  }, {
+    type: 'Seasonal',
+    name: 'HOO3',
+    description: 'HOO Desc 3',
+    status: false
+  }, {
+    type: 'Holiday',
+    name: 'HOO4',
+    description: 'HOO Desc 4',
+    status: false
+  }]
 
   render() {
-    const { channels, scheduleTypes } = this.state
     return (
       <div className="app">
-        <TreeAccordian
-          index="1"
-          className="channels-accordian"
-          showContent={true}
-          childClass="accordian-child-class"
-          title="Set channel(s)."
-          description="Some text to display."
-        >
-          <div className='channels-wrapper'>
-            {channels.map(channel => <Channel
-              key={channel.label}
-              label={channel.label}
-              content={channel.content}
-              selected={channel.selected}
-              labelClass='c-label'
-              contentClass='c-content'
-              className='c-item-container'
-              onChannelSelection={label => this.handleChannelSelection(label, "channels", channels)}
-            />)}
-          </div>
-        </TreeAccordian>
-        <TreeAccordian
-          index="2"
-          className="channels-accordian"
-          childClass="accordian-child-class"
-          title="Set schedule type."
-          description="Some text to display."
-        >
-          <div className='channels-wrapper'>
-            {scheduleTypes.map(sc => <Channel
-              key={sc.label}
-              label={sc.label}
-              content={sc.content}
-              selected={sc.selected}
-              labelClass='c-label'
-              contentClass='c-content'
-              className='c-item-container'
-              onChannelSelection={label => this.handleChannelSelection(label, 'scheduleTypes', scheduleTypes)}
-            />)}
-          </div>
-        </TreeAccordian>
-        <TreeAccordian
-          index="3"
-          className="channels-accordian"
-          childClass="accordian-child-class"
-          title="Set date and time."
-          description="Some text to display."
-        >
-        </TreeAccordian>
-        <TreeAccordian
-          index="4"
-          className="channels-accordian"
-          childClass="accordian-child-class"
-          title="Assign to call targets and queues."
-          description="Some text to display."
-        >
-        </TreeAccordian>
-        <TreeAccordian
-          index="5"
-          className="channels-accordian"
-          childClass="accordian-child-class"
-          title="Enter schedule details."
-          description="Some text to display."
-        >
-        </TreeAccordian>
+        <Grid
+          columnsData={this.columnsData}
+          rowData={this.rowData}
+        />
       </div>
     );
   }
