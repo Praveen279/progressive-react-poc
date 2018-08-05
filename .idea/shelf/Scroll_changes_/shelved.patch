@@ -1,0 +1,68 @@
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React, { Component } from 'react';\nimport Channel from './channel'\nimport './App.css'\nimport TreeAccordian from './TreeAccordian'\n\nconst channels = [{\n  label: 'phone',\n  content: 'Out of the loop shotgun approach, Wheelhouse.'\n}, {\n  label: 'chat',\n  content: 'Out of the loop shotgun approach, Wheelhouse.'\n}, {\n  label: 'email',\n  content: 'Out of the loop shotgun approach, Wheelhouse.'\n}]\n\nconst scheduleTypes = [{\n  label: 'holiday',\n  content: 'Out of the loop shotgun approach, Wheelhouse.'\n}, {\n  label: 'seasonal',\n  content: 'Out of the loop shotgun approach, Wheelhouse.'\n}, {\n  label: 'meeting',\n  content: 'Out of the loop shotgun approach, Wheelhouse.'\n}]\n\nclass App extends Component {\n\n  state = { channels, scheduleTypes }\n\n  handleChannelSelection = (cLabel, stateAttr, channels) => {\n    channels = channels.map(c => { c.selected = false; return c })\n    const i = channels.findIndex(c => c.label === cLabel)\n    channels[i].selected = true\n    this.setState({ [stateAttr]: channels })\n  }\n\n  render() {\n    const { channels, scheduleTypes } = this.state\n    return (\n      <div className=\"app\">\n        <TreeAccordian\n          index=\"1\"\n          className=\"channels-accordian\"\n          showContent={true}\n          childClass=\"accordian-child-class\"\n          title=\"Set channel(s).\"\n          description=\"Some text to display.\"\n        >\n          <div className='channels-wrapper'>\n            {channels.map(channel => <Channel\n              key={channel.label}\n              label={channel.label}\n              content={channel.content}\n              selected={channel.selected}\n              labelClass='c-label'\n              contentClass='c-content'\n              className='c-item-container'\n              onChannelSelection={label => this.handleChannelSelection(label, \"channels\", channels)}\n            />)}\n          </div>\n        </TreeAccordian>\n        <TreeAccordian\n          index=\"2\"\n          className=\"channels-accordian\"\n          childClass=\"accordian-child-class\"\n          title=\"Set schedule type.\"\n          description=\"Some text to display.\"\n        >\n          <div className='channels-wrapper'>\n            {scheduleTypes.map(sc => <Channel\n              key={sc.label}\n              label={sc.label}\n              content={sc.content}\n              selected={sc.selected}\n              labelClass='c-label'\n              contentClass='c-content'\n              className='c-item-container'\n              onChannelSelection={label => this.handleChannelSelection(label, 'scheduleTypes', scheduleTypes)}\n            />)}\n          </div>\n        </TreeAccordian>\n        <TreeAccordian\n          index=\"3\"\n          className=\"channels-accordian\"\n          childClass=\"accordian-child-class\"\n          title=\"Set date and time.\"\n          description=\"Some text to display.\"\n        >\n        </TreeAccordian>\n        <TreeAccordian\n          index=\"4\"\n          className=\"channels-accordian\"\n          childClass=\"accordian-child-class\"\n          title=\"Assign to call targets and queues.\"\n          description=\"Some text to display.\"\n        >\n        </TreeAccordian>\n        <TreeAccordian\n          index=\"5\"\n          className=\"channels-accordian\"\n          childClass=\"accordian-child-class\"\n          title=\"Enter schedule details.\"\n          description=\"Some text to display.\"\n        >\n        </TreeAccordian>\n      </div>\n    );\n  }\n}\n\nexport default App;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.js	(revision 066e76426d23c771e2479944d13916c92060f749)
++++ src/App.js	(date 1532551961000)
+@@ -25,16 +25,21 @@
+   content: 'Out of the loop shotgun approach, Wheelhouse.'
+ }]
+ 
++const MAX_INDEX = 5
++
+ class App extends Component {
+ 
+   state = { channels, scheduleTypes }
+ 
+-  handleChannelSelection = (cLabel, stateAttr, channels) => {
++  handleChannelSelection = (cLabel, stateAttr, channels, index) => {
+     channels = channels.map(c => { c.selected = false; return c })
+     const i = channels.findIndex(c => c.label === cLabel)
+     channels[i].selected = true
+     this.setState({ [stateAttr]: channels })
++    this.scrollToNextSection(index)
+   }
++
++  scrollToNextSection = index => window.scrollTo(0, index === 1 ? 180 : 360)
+ 
+   render() {
+     const { channels, scheduleTypes } = this.state
+@@ -57,7 +62,7 @@
+               labelClass='c-label'
+               contentClass='c-content'
+               className='c-item-container'
+-              onChannelSelection={label => this.handleChannelSelection(label, "channels", channels)}
++              onChannelSelection={label => this.handleChannelSelection(label, "channels", channels, 1)}
+             />)}
+           </div>
+         </TreeAccordian>
+@@ -77,7 +82,7 @@
+               labelClass='c-label'
+               contentClass='c-content'
+               className='c-item-container'
+-              onChannelSelection={label => this.handleChannelSelection(label, 'scheduleTypes', scheduleTypes)}
++              onChannelSelection={label => this.handleChannelSelection(label, 'scheduleTypes', scheduleTypes, 2)}
+             />)}
+           </div>
+         </TreeAccordian>
+Index: src/TreeAccordian.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react'\nimport './treeAccordian.css'\n\nexport default class TreeAccordian extends React.Component {\n\n    state = {showContent: !!this.props.showContent}\n\n    render() {\n        const {children, index, title, description, className, childClass} = this.props\n        const {showContent} = this.state\n        return (\n            <div className={className}>\n                <div className=\"tacc-title-container\" onClick={() => {this.setState({showContent: !this.state.showContent})}}>\n                    <div className={showContent ? \"tacc-index tacc-show\" : \"tacc-index tacc-common\"}>{index}</div>\n                    <div>\n                        <div className=\"tacc-title\">{title}</div>\n                        <div className=\"tacc-desc\">{description}</div>\n                    </div>\n                </div>\n                <div className={childClass}>\n                    {showContent ? children : \"\"}\n                </div>\n            </div>\n        )\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/TreeAccordian.js	(revision 066e76426d23c771e2479944d13916c92060f749)
++++ src/TreeAccordian.js	(date 1532551143000)
+@@ -9,7 +9,7 @@
+         const {children, index, title, description, className, childClass} = this.props
+         const {showContent} = this.state
+         return (
+-            <div className={className}>
++            <div className={className} id={`section-${index}`}>
+                 <div className="tacc-title-container" onClick={() => {this.setState({showContent: !this.state.showContent})}}>
+                     <div className={showContent ? "tacc-index tacc-show" : "tacc-index tacc-common"}>{index}</div>
+                     <div>

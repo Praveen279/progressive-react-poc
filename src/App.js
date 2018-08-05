@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
-import Grid from './grid'
+// import Grid from './grid'
+import DateGrid from './date-grid'
 
 class App extends Component {
 
@@ -56,10 +57,11 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Grid
+        {/* <Grid
           columnsData={this.columnsData}
           rowData={this.rowData}
-        />
+        /> */}
+        <DateGrid />
       </div>
     );
   }

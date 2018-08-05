@@ -1,0 +1,28 @@
+.date-container {
+    display: flex;
+}
+
+.date-weekday {
+    padding: 5px 30px;
+    background: #00b662;
+    border-radius: 5px;
+    font-size: 11px;
+    margin: 10px;
+    color: #FFF;
+    height: 13px;
+}
+
+.date-weekend {
+    padding: 5px 30px;
+    background: #FFF;
+    border-radius: 5px;
+    font-size: 11px;
+    margin: 10px;
+    height: 13px;
+}
+
+.date-sc-time {
+    border: 2px solid #00b662;
+    margin: 0px 10px;
+    padding: 10px;
+}
