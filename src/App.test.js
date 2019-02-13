@@ -7,12 +7,15 @@ import { ApolloProvider } from 'react-apollo';
 import clientMock from './clientMock';
 import './enzyme-adapter';
 
-it('react-test-renderer', () => {
-  const tree = mount((
-    <ApolloProvider client={clientMock}>
-      <App />
-    </ApolloProvider>
-  ))
-  console.log('%%%%%%%%%%%%%%%%%%%%%', tree)
-  expect(tree.find('.container').length).toBe(1);
+jest.mock('./constants');
+
+describe("app", () => {
+  it('react-test-renderer', () => {
+    const tree = mount((
+      <ApolloProvider client={clientMock}>
+        <App />
+      </ApolloProvider>
+    ))
+    expect(tree.find('.container').length).toBe(1);
+  });
 });
